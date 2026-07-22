@@ -1,0 +1,75 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Monoton&family=Pacifico&family=Chakra+Petch:wght@400;600&family=Audiowide&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0}
+body{width:1772px;height:1385px;overflow:hidden}
+#stage{position:relative;width:1772px;height:1385px;color:#fff;
+  background:linear-gradient(180deg,#04020e 0%,#0d0626 45%,#2a0d4e 75%,#54156b 92%,#8f1e63 100%)}
+svg{position:absolute;left:0;top:0}
+.spine{position:absolute;top:0;width:74px;height:1385px;z-index:5;
+  background:linear-gradient(180deg,#12062b,#2a0d4e);display:flex;align-items:center;justify-content:center}
+.spine.left{left:0;border-right:2px solid rgba(255,47,160,.55)}
+.spine.right{right:0;border-left:2px solid rgba(255,47,160,.55)}
+.spinetext{font-family:'Chakra Petch';font-weight:600;font-size:38px;letter-spacing:6px;white-space:nowrap}
+.spine.left .spinetext{writing-mode:vertical-rl;transform:rotate(180deg)}
+.spine.right .spinetext{writing-mode:vertical-rl}
+.spinetext .t{color:#ffd319}.spinetext .n{color:#8ffbff}
+.panel{position:absolute;left:74px;top:0;width:1624px;height:1385px;z-index:4;
+  display:flex;flex-direction:column;align-items:center;padding:52px 60px 40px;box-sizing:border-box}
+.hdr{display:flex;align-items:baseline;gap:26px;margin-bottom:34px}
+.hdr .silly{font-family:'Bungee Shade';font-size:62px;color:#ffd319}
+.hdr .from{font-family:'Pacifico';font-size:46px;color:#ff6ac1;
+  text-shadow:0 0 14px rgba(255,106,193,.8)}
+.hdr .space{font-family:'Monoton';font-size:68px;color:#8ffbff;letter-spacing:8px;
+  text-shadow:0 0 8px #4de8ff,0 0 26px #24d6ff,0 0 60px #0aa9ff}
+.tracks{width:1180px}
+.row{display:flex;align-items:baseline;font-size:33px;line-height:55px}
+.row .no{font-family:'Audiowide';font-size:27px;color:#8ffbff;width:72px;text-align:right;
+  padding-right:26px;flex:none}
+.row .name{font-family:'Chakra Petch';font-weight:600;color:#fff;letter-spacing:1px}
+.row .inst{font-family:'Chakra Petch';font-style:italic;font-size:25px;color:#ff9de2;margin-left:14px}
+.row .dots{flex:1;border-bottom:2px dotted rgba(255,255,255,.28);margin:0 16px 10px}
+.row .time{font-family:'Audiowide';font-size:25px;color:rgba(255,255,255,.75);flex:none}
+.credits{margin-top:auto;text-align:center;padding-bottom:6px}
+.credits .rule{width:900px;height:2px;margin:0 auto 26px;
+  background:linear-gradient(90deg,transparent,#ff2fa0,#8ffbff,#ff2fa0,transparent)}
+.credits .by{font-family:'Pacifico';font-size:34px;color:#ff6ac1;margin-right:16px}
+.credits .who{font-family:'Audiowide';font-size:40px;color:#ffd319;letter-spacing:3px}
+.credits .made{font-family:'Chakra Petch';font-size:27px;color:#cfc3ff;margin-top:16px;letter-spacing:1px}
+</style></head><body>
+<div id="stage">
+  <svg width="1772" height="1385" viewBox="0 0 1772 1385"><g id="stars"></g></svg>
+  <div class="spine left"><div class="spinetext"><span class="t">SILLY SONGS FROM SPACE</span>&nbsp;&nbsp;&#10022;&nbsp;&nbsp;<span class="n">HENRY SOLBERG</span></div></div>
+  <div class="spine right"><div class="spinetext"><span class="t">SILLY SONGS FROM SPACE</span>&nbsp;&nbsp;&#10022;&nbsp;&nbsp;<span class="n">HENRY SOLBERG</span></div></div>
+  <div class="panel">
+    <div class="hdr"><span class="silly">SILLY SONGS</span><span class="from">from</span><span class="space">SPACE</span></div>
+    <div class="tracks" id="tracks"></div>
+    <div class="credits">
+      <div class="rule"></div>
+      <div><span class="by">by</span><span class="who">HENRY SOLBERG</span></div>
+      <div class="made">Created in Cubase using Native Instruments Komplete, sung by Vocaloid Brian.</div>
+    </div>
+  </div>
+</div>
+<script>
+const TRACKS=[
+ ["Maybe","3:25",0],["Closer to You","2:59",0],["Welcome to Jam Planet","2:32",1],
+ ["Target Star","3:25",0],["What You Want to See","2:41",0],["Spaceport Lounge","3:16",1],
+ ["The Illwoy Bird","2:42",1],["Way Up in the Sky","4:30",1],["Space Jazz 2","3:36",1],
+ ["Oibla Deskoy Miang","2:12",0],["Bamboo Grove","2:53",0],["Inner Space","3:57",0],
+ ["Majesty","2:41",0],["Stomping Spinning","2:34",0],["Solution","4:32",1]];
+document.getElementById('tracks').innerHTML=TRACKS.map((t,i)=>
+ `<div class="row"><span class="no">${i+1}</span><span class="name">${t[0]}</span>`+
+ (t[2]?`<span class="inst">(instrumental)</span>`:``)+
+ `<span class="dots"></span><span class="time">${t[1]}</span></div>`).join('');
+const stars=document.getElementById('stars');
+for(let i=0;i<160;i++){
+  const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  c.setAttribute('cx',Math.random()*1772);c.setAttribute('cy',Math.random()*1385);
+  c.setAttribute('r',Math.random()*1.7+0.5);
+  c.setAttribute('fill',['#ffffff','#ffe9a8','#a8f4ff','#ffc4e8'][Math.floor(Math.random()*4)]);
+  c.setAttribute('opacity',0.2+Math.random()*0.5);
+  stars.appendChild(c);
+}
+</script>
+</body></html>

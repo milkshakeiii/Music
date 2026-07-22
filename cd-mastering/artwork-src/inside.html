@@ -1,0 +1,40 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Chakra+Petch:wght@600&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0}
+body{width:1423px;height:1411px;overflow:hidden}
+#stage{position:relative;width:1423px;height:1411px;
+  background:linear-gradient(180deg,#04020e 0%,#0d0626 50%,#2a0d4e 85%,#54156b 100%)}
+.msg{position:absolute;width:100%;top:1210px;text-align:center;
+  font-family:'Pacifico';font-size:64px;color:#ff6ac1;
+  text-shadow:0 0 16px rgba(255,106,193,.8),0 0 50px rgba(255,41,117,.5)}
+</style></head><body>
+<div id="stage">
+<svg width="1423" height="1411" viewBox="0 0 1423 1411">
+  <defs>
+    <radialGradient id="planet" cx=".35" cy=".3" r="1">
+      <stop offset="0" stop-color="#ffd9f2"/><stop offset=".45" stop-color="#c65cff"/><stop offset="1" stop-color="#2a0d4e"/>
+    </radialGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <g id="stars"></g>
+  <g transform="translate(711,640)">
+    <circle r="300" fill="url(#planet)"/>
+    <ellipse rx="520" ry="120" fill="none" stroke="#8ffbff" stroke-width="16" transform="rotate(-16)" opacity=".85" filter="url(#glow)"/>
+    <ellipse rx="600" ry="150" fill="none" stroke="#ff2fa0" stroke-width="8" transform="rotate(-16)" opacity=".7"/>
+  </g>
+</svg>
+<div class="msg">thank you for listening!</div>
+</div>
+<script>
+const stars=document.getElementById('stars');
+for(let i=0;i<260;i++){
+  const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  c.setAttribute('cx',Math.random()*1423);c.setAttribute('cy',Math.random()*1411);
+  c.setAttribute('r',Math.random()<0.85?Math.random()*1.8+0.6:Math.random()*3+2);
+  c.setAttribute('fill',['#ffffff','#ffe9a8','#a8f4ff','#ffc4e8'][Math.floor(Math.random()*4)]);
+  c.setAttribute('opacity',0.3+Math.random()*0.6);
+  stars.appendChild(c);
+}
+</script>
+</body></html>

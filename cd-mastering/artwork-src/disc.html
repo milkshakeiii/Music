@@ -1,0 +1,30 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+html,body{margin:0;padding:0}body{width:1394px;height:1394px;overflow:hidden;background:#0b0518}
+</style></head><body>
+<svg width="1394" height="1394" viewBox="0 0 1394 1394">
+  <defs><filter id="soft"><feGaussianBlur stdDeviation="2.2"/></filter></defs>
+  <rect width="1394" height="1394" fill="#0b0518"/>
+  <g id="rings"></g>
+</svg>
+<script>
+const NS='http://www.w3.org/2000/svg';
+const g=document.getElementById('rings');
+const palette=['#ff2975','#ff5f6d','#ff9e00','#ffd319','#8ffbff','#29b6ff','#7a5cff','#c65cff'];
+const widths=[46,34,54,30,60,38,50,32];
+let r=697;let i=0;
+while(r>215){
+  const w=widths[i%widths.length];
+  const col=palette[i%palette.length];
+  const glow=document.createElementNS(NS,'circle');
+  glow.setAttribute('cx',697);glow.setAttribute('cy',697);glow.setAttribute('r',r-w/2);
+  glow.setAttribute('fill','none');glow.setAttribute('stroke',col);
+  glow.setAttribute('stroke-width',w+10);glow.setAttribute('opacity',0.45);
+  glow.setAttribute('filter','url(#soft)');g.appendChild(glow);
+  const c=document.createElementNS(NS,'circle');
+  c.setAttribute('cx',697);c.setAttribute('cy',697);c.setAttribute('r',r-w/2);
+  c.setAttribute('fill','none');c.setAttribute('stroke',col);c.setAttribute('stroke-width',w);
+  g.appendChild(c);
+  r-=w+14;i++;
+}
+</script>
+</body></html>

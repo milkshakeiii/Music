@@ -1,0 +1,85 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Monoton&family=Pacifico&family=Chakra+Petch:wght@400;600&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0}
+body{width:1423px;height:1411px;overflow:hidden}
+#stage{position:relative;width:1423px;height:1411px;
+  background:linear-gradient(180deg,#04020e 0%,#0d0626 38%,#2a0d4e 62%,#54156b 78%,#a02166 92%,#e8447c 100%)}
+svg{position:absolute;left:0;top:0}
+.title-arc{font-family:'Bungee Shade';font-size:158px;fill:#ffd319}
+.from{position:absolute;width:100%;top:520px;text-align:center;
+  font-family:'Pacifico';font-size:128px;color:#ff6ac1;
+  text-shadow:0 0 18px rgba(255,106,193,.9),0 0 60px rgba(255,41,117,.6)}
+.space{position:absolute;width:100%;top:660px;text-align:center;
+  font-family:'Monoton';font-size:300px;color:#8ffbff;letter-spacing:22px;
+  transform:scaleY(1.12);transform-origin:top center;
+  text-shadow:0 0 10px #4de8ff,0 0 34px #24d6ff,0 0 90px #0aa9ff,0 0 160px #0a6cff}
+.stereo{position:absolute;width:100%;top:1330px;text-align:center;
+  font-family:'Chakra Petch';font-weight:600;font-size:30px;color:rgba(255,255,255,.9);
+  letter-spacing:14px;text-shadow:0 0 12px rgba(255,255,255,.5)}
+</style></head><body>
+<div id="stage">
+  <svg id="bg" width="1423" height="1411" viewBox="0 0 1423 1411">
+    <defs>
+      <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ffd319"/><stop offset=".55" stop-color="#ff9e00"/><stop offset="1" stop-color="#ff2975"/>
+      </linearGradient>
+      <mask id="sunstripes">
+        <rect x="0" y="0" width="1423" height="1411" fill="white"/>
+        <rect x="430" y="948" width="560" height="10" fill="black"/>
+        <rect x="430" y="978" width="560" height="14" fill="black"/>
+        <rect x="430" y="1012" width="560" height="18" fill="black"/>
+        <rect x="430" y="1050" width="560" height="22" fill="black"/>
+      </mask>
+      <radialGradient id="planet" cx=".35" cy=".3" r="1">
+        <stop offset="0" stop-color="#e0b3ff"/><stop offset=".5" stop-color="#9b59f0"/><stop offset="1" stop-color="#3d1670"/>
+      </radialGradient>
+      <filter id="glow"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <g id="stars"></g>
+    <!-- synthwave sun on horizon -->
+    <circle cx="711" cy="1075" r="200" fill="url(#sun)" mask="url(#sunstripes)" filter="url(#glow)"/>
+    <!-- ringed planet -->
+    <g transform="translate(150,640)">
+      <circle r="78" fill="url(#planet)"/>
+      <ellipse rx="136" ry="30" fill="none" stroke="#ff9de2" stroke-width="9" transform="rotate(-18)" opacity=".9"/>
+      <ellipse rx="160" ry="40" fill="none" stroke="#7df9ff" stroke-width="4" transform="rotate(-18)" opacity=".7"/>
+    </g>
+    <!-- flying saucer -->
+    <g transform="translate(1282,120) rotate(8)" filter="url(#glow)">
+      <ellipse cx="0" cy="0" rx="78" ry="21" fill="#c9d6e8"/>
+      <ellipse cx="0" cy="-16" rx="34" ry="21" fill="#8ffbff" opacity=".95"/>
+      <ellipse cx="0" cy="5" rx="78" ry="11" fill="#8e9fb8"/>
+      <circle cx="-47" cy="6" r="6" fill="#ffd319"/><circle cx="0" cy="9" r="6" fill="#ff2975"/><circle cx="47" cy="6" r="6" fill="#ffd319"/>
+      <polygon points="-40,18 40,18 66,88 -66,88" fill="#8ffbff" opacity=".16"/>
+    </g>
+    <!-- arched title -->
+    <path id="arc" d="M 70 420 A 1150 1150 0 0 1 1353 420" fill="none"/>
+    <text class="title-arc" filter="url(#glow)"><textPath href="#arc" startOffset="50%" text-anchor="middle">SILLY SONGS</textPath></text>
+  </svg>
+  <div class="from">from</div>
+  <div class="space">SPACE</div>
+  <svg id="grid" width="1423" height="336" viewBox="0 0 1423 336" style="top:1075px"></svg>
+  <div class="stereo">&#10022;&nbsp; STEREO &nbsp;&#10022;&nbsp; HIGH-FIDELITY RECORDING &nbsp;&#10022;</div>
+</div>
+<script>
+const stars=document.getElementById('stars');
+for(let i=0;i<230;i++){
+  const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  c.setAttribute('cx',Math.random()*1423);
+  c.setAttribute('cy',Math.random()*1000);
+  c.setAttribute('r',Math.random()<0.85?Math.random()*1.8+0.6:Math.random()*3+2);
+  c.setAttribute('fill',['#ffffff','#ffe9a8','#a8f4ff','#ffc4e8'][Math.floor(Math.random()*4)]);
+  c.setAttribute('opacity',0.35+Math.random()*0.65);
+  stars.appendChild(c);
+}
+const grid=document.getElementById('grid');
+const NS='http://www.w3.org/2000/svg';
+function line(x1,y1,x2,y2,w,o){const l=document.createElementNS(NS,'line');
+  l.setAttribute('x1',x1);l.setAttribute('y1',y1);l.setAttribute('x2',x2);l.setAttribute('y2',y2);
+  l.setAttribute('stroke','#ff2fa0');l.setAttribute('stroke-width',w);l.setAttribute('opacity',o);grid.appendChild(l);}
+for(let x=-2100;x<=3500;x+=190){line(711,0,x,336,2.5,0.75);}
+[3,10,22,40,66,102,150,212,290].forEach((y,i)=>line(0,y,1423,y,2+i*0.35,0.8));
+line(0,1,1423,1,4,1);
+</script>
+</body></html>
